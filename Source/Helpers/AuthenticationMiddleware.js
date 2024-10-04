@@ -9,7 +9,6 @@ const AuthenticationMiddleware = () => {
                 return response.status(401).send(responseFormtter({error: 'Unauthorized Access!'}));
             }
             let token = request.headers['authorization'].split(' ')[1];
-
             let verifiedToken = verifyAuthJwtToken(token, Config.JWT_SECRET);
 
             let userId = verifiedToken.data.split(':')[0];

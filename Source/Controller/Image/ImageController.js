@@ -45,6 +45,8 @@ const ImageController = {
 
             const uploadUrl = await uploadProcess;
 
+            console.log(uploadUrl.Location);
+
             return {message: 'Image Generated Sccessfully!', data: {url: uploadUrl.Location}};
         } catch (error) {
             console.log(error);

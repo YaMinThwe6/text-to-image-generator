@@ -2,12 +2,24 @@
 const Express = require('express');
 const Helmet = require('helmet');
 const {isEmpty} = require('./Helpers/Utils');
+const Cors = require('cors');
 
 const App = Express();
 
 // express configurations starting here.
 App.use(Express.json());
 App.use(Helmet());
+const whitelistedOrigins = ['http://localhost:5173']
+App.use(Cors({
+    origin: function (origin, callback) {
+      if (whitelistedOrigins.indexOf(origin) !== -1) {
+        callback(null, true)
+      } else {
+        callback(new Error('Not allowed by CORS'))
+      }
+    },
+    credentials: true
+  }));
 
 /*----------------------------------------------------------------------------*/
 // Routes Configurations
